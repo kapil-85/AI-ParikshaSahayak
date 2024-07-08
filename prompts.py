@@ -107,10 +107,6 @@ ai_prompt="""Based on the context, generate only questions or questions with ans
             2. Mode of questions - {}
             3. Type of questions - {}
             If type of questions is selected as "Short Questions", create questions that can be answered in 3 sentences or less.
-            If type of questions is selected as "Long Questions", create questions that require answering in over 100 words.
-            If type of questions is selected as "MCQ", create multiple choice questions that can be answered in 1 or 2 words.
-            If type of questions is selected as "Fill in the Blanks", create fill in the blank type questions that can be answered in 1 or 2 words.
-            If type of questions is selected as "True and False", create questions that can be answered as True or False.
             
             The response is to be generated in English and Hindi, first in English then in Hindi.
             If the number of questions is mentioned as zero, then display the message "Please specify the number of questions to generate" and do not provide a further response.
