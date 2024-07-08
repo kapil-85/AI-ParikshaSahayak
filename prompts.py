@@ -140,7 +140,7 @@ ai_topic_prompt1="""Based on the context, generate only questions considering fo
     questions and answers should be started from new line.
     Response is to be generated in both english and Hindi,first generate in english then in Hindi
     and if you are generating Answers also, Answer it in a new line and Generate questions according to selected Pre Uploaded Document only, Don't take help from the internet.
-    If the Topic is not present in the selected Document, write "This topic is not present in Book" & then write all the topics which are present in the uploaded document, don't write topics of "Topic Name"
+    If the Topic is not present in the selected Document, write "This topic is not present in Book" & then list all the topics which are present in the uploaded document in tabular format and call this list "Topics available"
     
 """
 ai_topic_prompt_questions="""Based on the context, extract only questions
