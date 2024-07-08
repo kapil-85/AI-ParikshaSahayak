@@ -101,19 +101,18 @@ latex_prompt="""format the response {} into python list.
     Remember to keep all the information as it is
     """
 
-ai_prompt="""Based on the context, generate only questions considering following constraints,
-             1. number of questions  - {}
-             2. mode of questions - {}
-             3. type of questions - {} 
-             Generate questions according to Madhya Pradesh Board Education School
-             Response is to be generated in both english and Hindi,first generate in english then in Hindi
-             number of questions is metioned zero then show message please add the number question,
-             after number of questions mentioned then start the generating questions and answer.
-             and if you are generating Answers also, Answer start in a new line and Generate questions according to Madhya Pradesh School Education Board
-             generate the all types of question and answer,and please insure the question and answer based on topic or text.
-             Remember to keep all the information as it is. Response - {}
 
 
+ai_prompt="""Based on the context, generate only questions or questions with answers considering the following constraints:
+            1. Number of questions - {}
+            2. Mode of questions - {}
+            3. Type of questions - {}
+            The response is to be generated in English and Hindi, first in English then in Hindi.
+            If the number of questions is mentioned as zero, then display the message "Please specify the number of questions to generate" and do not provide a further response.
+            If the number of questions is mentioned, then generate the response.
+            If you are generating answers as well, the answer must always start on a new line.
+            Generate the response from the provided context only.
+            Remember to keep all the information as it is. Response - {}
 """
 
 ai_topic_prompt="""Based on the context, generate only questions considering following constraints,
