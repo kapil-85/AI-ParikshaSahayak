@@ -60,10 +60,11 @@ images = ['6MarkQ']
 #os.environ["OPENAI_API_TYPE"] = ""
 #os.environ["OPENAI_API_VERSION"] = ""
 #os.environ["OPENAI_API_BASE"] = ""
-#os.environ["OPENAI_API_KEY"] = 
+#os.environ["OPENAI_API_KEY"]
 
-openai_api_key2 = st.secrets["secret_section"]["OPENAI_API_KEY"]
 #openai_api_key = os.getenv('OPENAI_API_KEY')
+openai_api_key = os.getenv("OPENAI_API_KEY")
+openai_api_key2 = st.secrets["secret_section"]["OPENAI_API_KEY"]
 TEMP_MD_FILE = r"question.pdf"
 TEMP_PDF_FILE = "__temp.pdf"
 
@@ -380,7 +381,8 @@ if st.session_state.teach=='Teachers':
                     st.session_state.language_chain = ConversationChain( llm=ChatOpenAI
                     (
                         model="gpt-3.5-turbo",
-                        temperature=0.7
+                        temperature=0.7,
+                        api_key=openai_api_key2
                         ),memory=memory)
                     _ = st.session_state.llm({'question':initialise_prompt})
                     if user_input:
@@ -494,7 +496,8 @@ if st.session_state.teach=='Teachers':
                                 if st.session_state.text and st.session_state.mode_of_questions!='Select Option' :
                                     st.session_state.llm = ConversationChain( llm=ChatOpenAI(
                                                               model = "gpt-3.5-turbo",
-                                                              temperature=0.7
+                                                              temperature=0.7,
+                                                              api_key=openai_api_key2
                                                               ))
                                     formatted_output = st.session_state.llm.predict(input = ai_topic_prompt1.format(st.session_state.topic_name,
                                                                                                 st.session_state.no_of_questions,
@@ -543,7 +546,8 @@ if st.session_state.teach=='Teachers':
                     )
                     st.session_state.language_chain = ConversationChain( llm=ChatOpenAI(
                         model="gpt-3.5-turbo",
-                        temperature=0
+                        temperature=0,
+                        api_key=openai_api_key2
                         ),memory=memory)
                     _ = st.session_state.llm({'question':initialise_prompt})
                     if user_input:
@@ -627,7 +631,8 @@ if st.session_state.teach=='Teachers':
                     #     Read the content of the file
                         st.session_state.mcq_chain = ConversationChain( llm=ChatOpenAI(
                         model="gpt-3.5-turbo",
-                        temperature=0.7
+                        temperature=0.7,
+                        api_key=openai_api_key2
                         ))
                         outputs = chat.mcq_response(text)
                         #st.write(st.session_state.outputs)
@@ -669,7 +674,7 @@ if st.session_state.teach=='Teachers':
                         text = file.read()
                         st.session_state.learn_outcome_chain = ConversationChain(llm=ChatOpenAI(
                         model = "gpt-3.5-turbo",
-                        temperature=0.7
+                        temperature=0.7,api_key=openai_api_key2
                         ))
                         outputs = chat.learn_outcome_term(text)
                         #st.write(outputs)
@@ -709,7 +714,8 @@ if st.session_state.teach=='Teachers':
                        if st.session_state.text and st.session_state.mode_of_questions!='Select Option' :
                             st.session_state.llm = ConversationChain( llm=ChatOpenAI(
                             model="gpt-3.5-turbo",
-                            temperature=0.7
+                            temperature=0.7,
+                            api_key=openai_api_key2
                             )) 
                             formatted_output = st.session_state.llm.predict(input = ai_prompt.format(st.session_state.no_of_questions,
                                                                             st.session_state.mode_of_questions,
@@ -877,7 +883,8 @@ if st.session_state.teach=='Students':
                         if st.session_state.text and st.session_state.mode_of_questions!='Select Option' :
                             st.session_state.llm = ConversationChain( llm=ChatOpenAI(
                             model_name="gpt-3.5-turbo",
-                            temperature=0.7
+                            temperature=0.7,
+                            api_key=openai_api_key2
                             )) 
                             formatted_output = st.session_state.llm.predict(input = ai_prompt.format(st.session_state.no_of_questions,
                                                                             st.session_state.mode_of_questions,
@@ -1163,7 +1170,8 @@ if st.session_state.teach=='Students':
                           )
                          st.session_state.language_chain = ConversationChain( llm=ChatOpenAI(
                          model="gpt-3.5-turbo",
-                         temperature=0.7
+                         temperature=0.7,
+                         api_key=openai_api_key2
                          ),memory=memory)
                          _ = st.session_state.llm({'question':initialise_prompt})
                     if user_input:
@@ -1216,7 +1224,8 @@ if st.session_state.teach=='Students':
                         st.session_state.text = file.read()
                         st.session_state.mcq_chain = ConversationChain( llm=ChatOpenAI(
                         model="gpt-3.5-turbo",
-                        temperature=0.7
+                        temperature=0.7,
+                        api_key=openai_api_key2
                         ))
                         outputs = chat.mcq_response(st.session_state.text)
                         st.write(outputs)
