@@ -482,18 +482,18 @@ if st.session_state.teach=='Teachers':
                             print("embeddings Done")
                             col1, col2 = st.columns(2)
                             with col1:
-                                st.session_state.complexity =  st.selectbox('Complexity Mode Required?*', ['Easy', 'Difficult'],index=0,key="mode")
-                                st.session_state.no_of_questions = st.number_input('No. of  Questions to generate*',key="ai_questions",step=1,max_value=30)
-                                st.session_state.mode_of_questions = st.selectbox('Choose Answer Required/Not*', ['Only Questions', 'Questions with Answers'],index=0,key="quesansw")
+                                st.session_state.complexity =  st.selectbox('Complexity mode required?*', ['Easy', 'Difficult'],index=0,key="mode")
+                                st.session_state.no_of_questions = st.number_input('No. of  questions to generate*',key="ai_questions",step=1,max_value=30)
+                                st.session_state.mode_of_questions = st.selectbox('Choose answer required?*', ['Only Questions', 'Questions with Answers'],index=0,key="quesansw")
                             with col2:
-                                st.session_state.topic_name = st.text_input('Specific Chapter/Topic Name*',placeholder="AI Chapter/Topic Name")
-                                st.session_state.type_of_questions =  st.selectbox('Choose Question Type*', ['Short Questions', 'Long Questions','MCQ','Fill in the Blanks','True and False'],index=0)
-                                st.session_state.language =  st.selectbox('Choose Response Language Mode*', ['English and Hindi'],index=0,key="lang")
+                                st.session_state.topic_name = st.text_input('Specific chapter/topic name*',placeholder="AI Chapter/Topic Name")
+                                st.session_state.type_of_questions =  st.selectbox('Choose question type*', ['Short Questions', 'Long Questions','MCQ','Fill in the Blanks','True and False'],index=0)
+                                st.session_state.language =  st.selectbox('Choose response language mode*', ['English and Hindi'],index=0,key="lang")
                             # docsearch = chat.create_doc_embeddings(documents)
                             #if is_word_in_text(st.session_state.topic_name,formatted_output) or st.session_state.topic_name=='' :
                             
                             if st.button("Submit"):
-                                if st.session_state.text and st.session_state.mode_of_questions!='Select Option' :
+                                if st.session_state.text and st.session_state.mode_of_questions!='Select option' :
                                     st.session_state.llm = ConversationChain( llm=ChatOpenAI(
                                                               model = "gpt-3.5-turbo",
                                                               temperature=0.7,
