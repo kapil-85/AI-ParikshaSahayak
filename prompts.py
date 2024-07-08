@@ -131,11 +131,12 @@ ai_topic_prompt="""Based on the context, generate only questions considering fol
 """
 ai_topic_prompt1="""Based on the context, generate only questions considering following constraints,
                     make sure the question and answer only generate from the selected document only
-    1. topic_name - {}
-    2. number of questions - {}
-    3. mode of questions - {}
-    4. type of questions - {}
-    5. Level of questions - {}
+    1. text - {}             
+    2. topic_name - {}
+    3. number of questions - {}
+    4. mode of questions - {}
+    5. type of questions - {}
+    6. Level of questions - {}
     questions and answers should be started from new line.
     Response is to be generated in both english and Hindi,first generate in english then in Hindi
     and if you are generating Answers also, Answer it in a new line and Generate questions according to selected Pre Uploaded Document only, Don't take help from the internet.
