@@ -139,7 +139,7 @@ ai_topic_prompt1="""Based on the context, generate only questions considering fo
     6. Level of questions - {}
     questions and answers should be started from new line.
     Response is to be generated in both english and Hindi,first generate in english then in Hindi.
-    If Answers are required, always start the Answer in a new line.Generate questions according to selected Pre Uploaded Document only, Don't take help from the internet.
+    If Answers are being generated, always start the Answer in a new line.
     If the Topic is not present in the selected Document, don't provide any questions or answers and rather write "This topic is not present in Book" & then list all the topics which are present in the uploaded document in tabular format and call this list "Topics available"
     
 """
