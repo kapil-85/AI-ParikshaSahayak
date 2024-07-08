@@ -20,15 +20,34 @@ SYSTEM_PROMPTS = {
 }
 
 
-initialise_prompt=''' Madhya Pradesh Board of Education , India. 
-                      Answer in a clear and organized manner.
-                      question and answer generate based on the document file to selected one only.
-                      if content is not present in the document then show error this type of content is not present in the text file.
-                      and if you are generating Answers also, Answer should be start a new line and Generate questions according to Madhya Pradesh School Education Board
-                      generate the all types of question and answer,and please insure the question and answer based on topic or text.
-                      
+initialise_prompt =''' You are an educator for class 1 to class 12 for Madhya Pradesh School Education Board, India. Answer in a clear and organized manner.
+Generate the question and answer from the uploaded document only, Don't take help from the internet.
                     '''
+initialise_prompt2 =''' File Selection and Processing:
 
+"Please select a file from the list to begin."
+"Choose a document to process and generate questions from."
+User Interaction:
+
+"Ask a question related to the selected document."
+"Enter your query or topic of interest to generate responses."
+Output Generation:
+
+"Generating questions based on the selected document."
+"Preparing responses and generating interactive content."
+Functional Choices:
+
+"Select complexity level: Easy or Difficult."
+"Choose the type of questions: Short, Long, MCQ, Fill in the Blanks, or True and False."
+Language and Response:
+
+"Specify the language mode for responses: English or English and Hindi."
+"Select the mode of questions: Only Questions or Questions with Answers."
+Feedback and Download Options:
+
+
+"""
+                    '''
 
 filter_prompt2 = """
 For the following user query, first analyze whether it is related to {} books/chapters.
@@ -84,30 +103,45 @@ latex_prompt="""format the response {} into python list.
     """
 
 ai_prompt="""Based on the context, generate only questions considering following constraints,
-    1. number of questions  - {}
-    2. mode of questions - {}
-    3. type of questions - {} 
-Generate questions according to Madhya Pradesh Board Education School
-Response is to be generated in both english and Hindi,first generate in english then in Hindi
-and if you are generating Answers also, Answer start in a new line and Generate questions according to Madhya Pradesh School Education Board
-generate the all types of question and answer,and please insure the question and answer based on topic or text.
-Remember to keep all the information as it is. Response - {}
+             1. number of questions  - {}
+             2. mode of questions - {}
+             3. type of questions - {} 
+             Generate questions according to Madhya Pradesh Board Education School
+             Response is to be generated in both english and Hindi,first generate in english then in Hindi
+             number of questions is metioned zero then show message please add the number question,
+             after number of questions mentioned then start the generating questions and answer.
+             and if you are generating Answers also, Answer start in a new line and Generate questions according to Madhya Pradesh School Education Board
+             generate the all types of question and answer,and please insure the question and answer based on topic or text.
+             Remember to keep all the information as it is. Response - {}
 
 
 """
 
 ai_topic_prompt="""Based on the context, generate only questions considering following constraints,
     1. topic of questions  - {}
+    2. number of questions - {} 
+    3. mode of questions - {}
+    4. type of questions - {}
+    5. Level of questions - {}
+    Response is to be generated in both english and Hindi,first generate in english then in Hindi,
+    and if you are generating Answers also, Answer it in a new line and Generate questions according to Madhya Pradesh School Education Board,
+    number of questions is metioned zero then show message please add the number question,
+    after number of questions mentioned then start the generating questions and answers.
+    generate the all types of question and answer,and please insure the question and answer based on topic or text.
+"""
+ai_topic_prompt1="""Based on the context, generate only questions considering following constraints,
+                    make sure the question and answer only generate from the selected document only
+    1. topic_name - {}
     2. number of questions - {}
     3. mode of questions - {}
     4. type of questions - {}
     5. Level of questions - {}
-    
+    questions and answers should be started from new line.
     Response is to be generated in both english and Hindi,first generate in english then in Hindi
-    and if you are generating Answers also, Answer it in a new line and Generate questions according to Madhya Pradesh School Education Board
-    generate the all types of question and answer,and please insure the question and answer based on topic or text.
+    and if you are generating Answers also, Answer it in a new line and Generate questions according to selected Pre Uploaded Document only, Don't take help from the internet.
+    If the Topic is not present in the selected Document, write "This topic is not present in Book" & then write all the topics which are present in the uploaded document, don't write topics of "Topic Name"
+    
 """
-
 ai_topic_prompt_questions="""Based on the context, extract only questions
 Remember to keep all the information as it is. Response - {}
 """
@@ -133,7 +167,10 @@ learn_outcome_prompt = """
              
     """
 
-student_prompt = """ Based on query {} generate response from context {}"""
+student_prompt = """Based on query {} generate response from context {}
+                    make sure generate response should be generated from uploaded document only.
+
+"""
 
 master_prompt = """
 Level of questions : This is the depth of the questions the teacher wants to generate. A low depth will cover the basics, and generalizations while a high depth will cover the specifics, details, unfamiliar, complex, and side cases. The lowest depth level is Easy, and the highest is Complex.
@@ -141,7 +178,6 @@ Level of questions : This is the depth of the questions the teacher wants to gen
 Do not discuss about the context you have recieved and do not mention you are unable to access or read any documents 
 
 Easy : Covers basics questions with simple definitions and brief explanations, suitable for beginners or quick overviews.
-Medium : Provides in-depth questions.
 Difficult : Provides expert and complex questions .
 
 if type of questions is Short Questions then generate questions according to 1 marks and 2 marks from given context
@@ -150,17 +186,20 @@ if type of questions is Long Questions then generate questions according to 3,4,
 You have been provided the Context/Subject/Chapter/Book 
 Based on the context, generate {} considering following constraints,
     1. Level of questions - {}
-    2. number of questions  - {}
-    3. type of questions - {}
+   
+    3. number of questions  - {}
+    4. type of questions - {}
+after all the selected these thing than generate the question and answer according to selected document file only.
 If topic name is not provided then based on context generate {} from books/chapters/Subject 
 
-if Level of questions is Yes then categorise the Response as Easy,Medium and Complex 
+if Level of questions is Yes then categorise the Response as Easy or Difficult 
 
 if topic name is not from context then mention this topic name is out of context
 
 Remember to generate questions according to Madhya Pradesh School Education Board
 Remember to keep all the information as it is. Response - {}
 Remember to not discuss about the context you have recieved and do not mention you are unable to access or read any documents 
+
 """
 
 lang_prompt = """ Translate the below response to {} language . 
