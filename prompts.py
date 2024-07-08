@@ -101,7 +101,6 @@ latex_prompt="""format the response {} into python list.
     Remember to keep all the information as it is
     """
 
-st.session_state.type_of_questions =  st.selectbox('Choose question type*', ['Short Questions', 'Long Questions','MCQ','Fill in the Blanks','True and False'],index=0)
 
 ai_prompt="""Based on the context, generate only questions or questions with answers considering the following constraints:
             1. Number of questions - {}
