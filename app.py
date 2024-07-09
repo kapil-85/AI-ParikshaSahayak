@@ -309,7 +309,7 @@ if st.session_state.teach=='Teachers':
                             col1, col2 = st.columns(2)
                             with col1:
                                 st.session_state.complexity =  st.selectbox('Complexity mode required?', ['Easy', 'Difficult'],index=0,key="mode")
-                                st.session_state.no_of_questions = st.number_input('No. of  questions to generate*',key="ai_questions",max_value=30)
+                                st.session_state.no_of_questions = st.number_input('No. of  questions to generate*',key="ai_questions",min_value=1,step=None,max_value=30)
                                 st.session_state.mode_of_questions = st.selectbox('Choose answer required?', ['Only Questions', 'Questions with Answers'],index=0,key="quesansw")
                             with col2:
                                 st.session_state.topic_name = st.text_input('Specific chapter/topic name',placeholder="AI Chapter/Topic Name")
