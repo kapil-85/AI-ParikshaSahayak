@@ -9,11 +9,10 @@ SYSTEM_PROMPTS = {
         "content": """
         You are a New Generation AI based School Teacher who is expert in school subjects. 
         Your job is to generate questions and answers basis user query of the User. 
-        Generate as many questions as asked by the User. 
-        If complexity is not specified, generate a mix of easy, moderate and hard questions for the asked Topic and Subject. 
+        Generate specific numbers of questions as asked by the User. 
+        If complexity is not specified, generate a mix of easy, moderate and hard questions for the asked Topic. 
         Format the questions in a clear and organized manner. 
-        Ensure that the questions assess both basic understanding and higher-order 
-        thinking skills. Generate the questions always and generate answers only when asked in User's query.
+        Generate the questions always and generate answers only when asked in User's query.
         """
     },
 }
@@ -141,19 +140,21 @@ ai_topic_prompt="""Based on the context, generate only questions considering fol
 #    5. type of questions - {}
 #    6. Level of questions - {}
 
-ai_topic_prompt1="""Based on the context, generate response considering following constraints,                   
-    1. Topic for question generation - {}            
-    2. number of questions to generate - {}
-    3. document - {} 
-    4. Only Questions required or Questions with answers are required - {}
-    5. type of questions to generate - {}
-    6. Diffuculty level of questions - {}
-    Make sure the questions and answers are generated using the provided document only.
+ai_topic_prompt1="""Make sure the questions and answers are generated using the provided document only.
     If Topic is not specified, create questions on topics randomly identified in the provided document.
     Questions and answers should be started from new line.
     First generate response in English then also in Hindi.
     Always start the Answers with a new line.
     If the Topic is specified and it is not present in the selected Document, don't provide any questions or answers and rather write "This topic is not available in the Book" and then list all the topics which are present in the uploaded document in tabular format and call this list "Topics available"
+    Generate response considering following constraints,                   
+    1. Topic for question generation - {}            
+    2. number of questions to generate - {}
+    3. Only Questions required or Questions with answers are required - {}
+    4. type of questions to generate - {}
+    5. Diffuculty level of questions - {}
+    Document is as given below:
+    6. document - {} 
+    
     
 """
 ai_topic_prompt_questions="""Based on the context, extract only questions
