@@ -151,9 +151,9 @@ ai_topic_prompt1="""Based on the context, generate response considering followin
     Make sure the questions and answers are generated using the provided document only.
     If Topic is not specified, create questions on topics randomly identified in the provided document.
     Questions and answers should be started from new line.
-    Response is to be generated in both english and Hindi,first generate response in english then in Hindi.
-    Always start the Answer in a new line.
-    If the Topic is not present in the selected Document, don't provide any questions or answers and rather write "This topic is not available in the Book" and then list all the topics which are present in the uploaded document in tabular format and call this list "Topics available"
+    First generate response in English then also in Hindi.
+    Always start the Answers with a new line.
+    If the Topic is specified and it is not present in the selected Document, don't provide any questions or answers and rather write "This topic is not available in the Book" and then list all the topics which are present in the uploaded document in tabular format and call this list "Topics available"
     
 """
 ai_topic_prompt_questions="""Based on the context, extract only questions
