@@ -257,7 +257,7 @@ if st.session_state.teach=='Teachers':
     st.session_state.quesai = st.title("Generate Question and Answer")
     if st.session_state.quesai:
         #tab1, tab2,tab3= st.tabs(["1. Upload Document", "2. Text Analyzer","3. Skill based Questions"])
-            choose=st.radio("Select Options",("Pre Uploaded","Text Analyer","Skill Based Questions","Terminologies and Keyterms","Learning Outcomes"),horizontal=True)
+            choose=st.radio("Select Options",("Pre Uploaded","Text Analyzer","Topic Based Questions","Terminologies and Keyterms","Learning Outcomes"),horizontal=True)
             if choose=="Upload Documents":
                 st.write('Note: File name should contain subject and class like maths_class10.pdf/.docx')
                 files = st.file_uploader('Upload Books,Notes,Question Banks ', accept_multiple_files=True,type=['pdf', 'docx'])
@@ -820,7 +820,7 @@ if st.session_state.teach=='Teachers':
                     st.info("Please upload an image file.")
    
                 
-            if choose=="Skill Based Questions":
+            if choose=="Topic Based Questions":
                 
                 col1, col2 = st.columns(2)
                 with col1:
