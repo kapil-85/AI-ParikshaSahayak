@@ -1268,7 +1268,7 @@ if st.session_state.teach=='Administration':
         folder_path = "./preuploaded"
 
         files = os.listdir(folder_path)
-                    
+        files.sort()            
         # Filter out only text files
         text_files = [file for file in files if file.endswith(".txt")]
 
@@ -1290,7 +1290,7 @@ if st.session_state.teach=='Administration':
         def view_text_files(folder_path):
             # Get a list of all files in the folder
             files = os.listdir(folder_path)
-            
+            files.sort()
             # Filter out only text files
             text_files = [file for file in files if file.endswith(".txt")]
 
@@ -1318,7 +1318,7 @@ if st.session_state.teach=='Administration':
         folder_path = "./preuploaded"
 
         files = os.listdir(folder_path)
-            
+        files.sort()    
             # Filter out only text files
         text_files = [file for file in files if file.endswith(".txt")]
 
