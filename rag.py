@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 openai_api_key2 = st.secrets["secret_section"]["OPENAI_API_KEY"]
 
-client = OpenAI(openai_api_key2)
+client = OpenAI(api_key=openai_api_key2)
 #from langchain.llms import AzureOpenAI
 
 
