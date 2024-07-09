@@ -12,7 +12,9 @@ import logging
 #from langchain.chat_models import AzureChatOpenAI
 from dotenv import load_dotenv
 from openai import OpenAI
-client = OpenAI()
+openai_api_key2 = st.secrets["secret_section"]["OPENAI_API_KEY"]
+
+client = OpenAI(openai_api_key2)
 #from langchain.llms import AzureOpenAI
 
 
