@@ -274,6 +274,8 @@ if st.session_state.teach=='Teachers':
             
             # TEACHER MODULE CODE - Select Available Options
             choose=st.radio("Select Options",("Pre Uploaded","Text Analyzer","Topic Based Questions","Terminologies and Keyterms","Learning Outcomes"),horizontal=True)
+            
+            # SELECT AVAILABLE OPTIONS - Generating Questions from Pre-Uploaded Documents
             if choose=="Pre Uploaded":
                 def list_files(folder_path):
                     return os.listdir(folder_path)
@@ -321,6 +323,18 @@ if st.session_state.teach=='Teachers':
                                                               temperature=0.7,
                                                               api_key=openai_api_key2
                                                               ))
+
+                                    CHECK_PROMPT = ai_topic_prompt1.format(st.session_state.topic_name,
+                                                                                                st.session_state.no_of_questions,
+                                                                                                st.session_state.text,
+                                                                                                    st.session_state.mode_of_questions,
+                                                                                                    st.session_state.type_of_questions,
+                                                                                                  st.session_state.complexity)
+                                    print("============CHECKING================")
+                                    print("============================")
+                                    print(CHECK_PROMPT)
+                                    print("============================")
+                                    print("============CHECKING================")
                                     formatted_output = st.session_state.llm.predict(input = ai_topic_prompt1.format(st.session_state.topic_name,
                                                                                                 st.session_state.no_of_questions,
                                                                                                 st.session_state.text,
