@@ -453,6 +453,7 @@ if st.session_state.teach=='Teachers':
                 folder_path="./preuploaded"
                 # Get list of files in folder
                 files_list = list_files(folder_path)
+                files_list.sort()        
                 # Remove file extension from each filename
                 files_list = [remove_extension(filename) for filename in files_list]
                 files_list.insert(0, "Select document")
@@ -616,6 +617,7 @@ if st.session_state.teach=='Teachers':
                 folder_path="./preuploaded"
                 # Get list of files in folder
                 files_list = list_files(folder_path)
+                files_list.sort()        
                 # Remove file extension from each filename
                 files_list = [remove_extension(filename) for filename in files_list]
                 files_list.insert(0, "Select document")
@@ -660,6 +662,7 @@ if st.session_state.teach=='Teachers':
                 folder_path="./preuploaded"
                 # Get list of files in folder
                 files_list = list_files(folder_path)
+                files_list.sort()        
                 # Remove file extension from each filename
                 files_list = [remove_extension(filename) for filename in files_list]
                 files_list.insert(0, "Select document")
