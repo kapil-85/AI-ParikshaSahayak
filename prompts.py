@@ -128,18 +128,31 @@ ai_topic_prompt="""Based on the context, generate only questions considering fol
     after number of questions mentioned then start the generating questions and answers.
     generate the all types of question and answer,and please insure the question and answer based on topic or text.
 """
-ai_topic_prompt1="""Based on the context, generate only questions considering following constraints,
-                    make sure the question and answer only generate from the selected document only
-    1. text - {}             
-    2. topic_name - {}
-    3. number of questions - {}
-    4. mode of questions - {}
-    5. type of questions - {}
-    6. Level of questions - {}
+#st.session_state.topic_name,
+#st.session_state.no_of_questions,
+#st.session_state.text,
+#st.session_state.mode_of_questions,
+#st.session_state.type_of_questions,
+#st.session_state.complexity
+#    1. text - {}             
+#    2. topic_name - {}
+#    3. number of questions - {}
+#    4. mode of questions - {}
+#    5. type of questions - {}
+#    6. Level of questions - {}
+
+ai_topic_prompt1="""Based on the context, generate response considering following constraints,
+                    make sure the questions and answers are generated using the selected document only
+    1. context for question generation - {}            
+    2. number of questions to generate - {}
+    3. document - {} 
+    4. Only Questions required or Questions with answers are required - {}
+    5. type of questions to generate - {}
+    6. Diffuculty level of questions - {}
     questions and answers should be started from new line.
-    Response is to be generated in both english and Hindi,first generate in english then in Hindi.
-    If Answers are being generated, always start the Answer in a new line.
-    If the Topic is not present in the selected Document, don't provide any questions or answers and rather write "This topic is not present in Book" & then list all the topics which are present in the uploaded document in tabular format and call this list "Topics available"
+    Response is to be generated in both english and Hindi,first generate response in english then in Hindi.
+    Always start the Answer in a new line.
+    If the Topic is not present in the selected Document, don't provide any questions or answers and rather write "This topic is not available in the Book" and then list all the topics which are present in the uploaded document in tabular format and call this list "Topics available"
     
 """
 ai_topic_prompt_questions="""Based on the context, extract only questions
