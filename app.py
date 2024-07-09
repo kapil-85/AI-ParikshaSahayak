@@ -197,11 +197,20 @@ def display_q(df):
             st.image(row['Image Path'],width=180)
         st.divider()
 
+
+
+
+
+
+# MAIN CONTENT PART - to update chat history in csv for download a pdf
 pd.set_option('display.max_colwidth', None)
 st.session_state.ques = pd.read_csv('update_question.csv')
 
 
 
+
+
+# MAIN CONTENT PART - Page Header Section for Logos and Title
 with st.container():
     col1, col2, col3 = st.columns([0.2, 0.6, 0.2], gap="small")
     with col1:
@@ -213,7 +222,7 @@ with st.container():
         st.markdown("###### AI Based Question Generation Assistance")
     with col3:
         l = Image.open('assests/28072020125926mpsedclogo.png')
-        re = l.resize((165, 155))  # Corrected the resize method call
+        re = l.resize((165, 127))  # Corrected the resize method call
         st.image(re)
          
         
@@ -250,199 +259,21 @@ def correct_bhashni_translations(text,lowercase_dict):
             corrected_text.append(word)  # If no correction needed, keep the word unchanged
     return ' '.join(corrected_text)
 
-    
-st.session_state.teach = st.radio("Select Option",(
+
+
+
+# MAIN CONTENT PART - Select User Role
+st.session_state.teach = st.radio("Select User Role",(
     'Teachers','Students','Administration'),key='airadio1')
+
+# MAIN CONTENT PART - Teacher Module Code
 if st.session_state.teach=='Teachers':
     st.session_state.quesai = st.title("Generate Question and Answer")
     if st.session_state.quesai:
         #tab1, tab2,tab3= st.tabs(["1. Upload Document", "2. Text Analyzer","3. Skill based Questions"])
+            
+            # TEACHER MODULE CODE - Select Available Options
             choose=st.radio("Select Options",("Pre Uploaded","Text Analyzer","Topic Based Questions","Terminologies and Keyterms","Learning Outcomes"),horizontal=True)
-            if choose=="Upload Documents":
-                st.write('Note: File name should contain subject and class like maths_class10.pdf/.docx')
-                files = st.file_uploader('Upload Books,Notes,Question Banks ', accept_multiple_files=True,type=['pdf', 'docx'])
-                if files:
-                    file_extension = files[0].name.split(".")[-1]
-                    if file_extension == "pdf":
-                        path = files[0].read()
-                        name=files[0].name[:-4]
-                        # Check if the file exists
-                        if not os.path.exists("preuploaded/"+name+".txt"):
-                            print("File Not Exist")
-                            with open("preuploaded/"+name+'.txt', 'w',encoding='utf-8') as file:
-                            # Open a file in write mode (creates a new file if it doesn't exist)
-                                st.session_state.text= chat.load_pdf_text(files[0],name)
-                                file.write(st.session_state.text)
-                        else:
-                            print("file Exist")
-                            st.session_state.filename=[]
-                            with open("preuploaded/"+name+'.txt', 'r',encoding='utf-8') as file:
-                    #        Read the content of the file
-                                st.session_state.filename.append(name)
-                                st.session_state.text = file.read()
-                        
-                        # print("Extracted Text is ########################")
-                        # print(st.session_state.text)
-                        
-                    elif file_extension =="docx":
-                        st.session_state.filename=[]
-                        doc_file=files[0]
-                        doc_name=files[0].name[:-5]
-                        st.session_state.filename.append(doc_name)
-                        st.session_state.text= get_text(doc_file)
-                        #st.write(st.session_state.text)
-                        #print("Extracted Text is ########################")
-                        #print(st.session_state.text)
-                    else:
-                        learning_files = files if files is not None else []
-                        st.session_state.text, documents = chat.load_documents(learning_files)
-                        # print("Extracted Text is ########################")
-                        # print(st.session_state.text)
-                        
-                        # if st.session_state.text:
-                        #         st.session_state.format_chain = ConversationChain( llm=AzureChatOpenAI(
-                        #         deployment_name="gpt-4",
-                        #         temperature=0
-                        #         ))
-                        #         formatted_output = chat.format_response(st.session_state.text)
-                        #         st.info(formatted_output)
-                    
-                    if st.session_state.text:
-
-                        # st.session_state.aiformat_chain = ConversationChain( llm=AzureChatOpenAI(
-                        # deployment_name="gpt-4turbo",
-                        # temperature=0
-                        # ))
-                        # formatted_output = chat.aiformat_response(st.session_state.text)
-                        # st.info(formatted_output)
-                        print("Inside Question Generation Bot")
-                        with open('dictionary.json','r') as f:
-                            existing_dictionary = json.load(f)
-
-                        lowercase_dict = {key.lower(): value for key, value in existing_dictionary.items()}
-                        
-                        st.session_state.text=correct_bhashni_translations(st.session_state.text,lowercase_dict)
-                        #st.write("Dictionary:", existing_dictionary)
-                        # print(st.session_state.text)
-                        # print(st.session_state.filename[0])
-                        docsearch = chat.get_cache_vectorstore(st.session_state.text,st.session_state.filename[0])
-                        print("embeddings Done")
-                        col1, col2 = st.columns(2)
-                        with col1:
-                            st.session_state.complexity =  st.selectbox('Complexity Mode Required?*', ['Easy', 'Difficult'],index=0,key="mode")
-                            st.session_state.no_of_questions = st.number_input('No. of  Questions to generate*',key="ai_questions",step=1,max_value=30)
-                            st.session_state.mode_of_questions = st.selectbox('Choose Answer Required/Not*', ['Only Questions', 'Questions with Answers'],index=0,key="quesansw")
-                        with col2:
-                            st.session_state.topic_name = st.text_input('Specific Chapter/Topic Name/Text*',placeholder="AI Chapter/Topic Name/Text")
-                            st.session_state.type_of_questions =  st.selectbox('Choose Question Type*', ['Short Questions', 'Long Questions','MCQ','Fill in the Blanks','True and False'],index=0)
-                            st.session_state.language =  st.selectbox('Choose Response Language Mode*', ['English','English and Hindi'],index=0,key="lang")
-                            #docsearch = chat.create_doc_embeddings(documents)
-                        
-                    #if is_word_in_text(st.session_state.topic_name,formatted_output) or st.session_state.topic_name=='' :
-
-                    
-                    # Storing the chat
-                    if 'generated' not in st.session_state:
-                        st.session_state['generated'] = []
-
-                    if 'past' not in st.session_state:
-                        st.session_state['past'] = []
-
-                    # Define a function to clear the input text
-                    def clear_input_text():
-                        global input_text
-                        input_text = ""
-
-                    # We will get the user's input by calling the get_text function
-                    def get_text():
-                        global input_text
-                        input_text = st.chat_input("Ask a question!")
-                        return input_text
-
-                    user_input = get_text()
-
-                    print('get the input text')
-
-                    # Initialize chat history
-                    if "messages" not in st.session_state:
-                        st.session_state.messages = []
-
-                    # Display chat messages from history on app rerun
-                    #for message in st.session_state.messages:
-                    #    with st.chat_message(message["role"]):
-                    #        if message['content'] != user_input:
-                    #            st.markdown(message["content"])
-
-                    st.session_state.llm = load_chain(docsearch)
-                    #print('chain loaded')
-                    memory = ConversationBufferMemory(
-                    return_messages=True,
-                    )
-                    st.session_state.language_chain = ConversationChain( llm=ChatOpenAI
-                    (
-                        model="gpt-3.5-turbo",
-                        temperature=0.7,
-                        api_key=openai_api_key2
-                        ),memory=memory)
-                    _ = st.session_state.llm({'question':initialise_prompt})
-                    if user_input:
-                        english_output,trans_output = chat.answer(user_input)
-                        print('get the output')
-                        st.session_state.messages.append({"role": "user", "content": user_input})
-                        # Display user message in chat message container
-                        with st.chat_message("user"):
-                             st.markdown(user_input)  
-
-                        # Display assistant response in chat message container
-                        with st.chat_message("assistant"):
-                            message_placeholder = st.empty()
-                            full_response = ""
-                            for char in english_output:
-                                full_response += char
-                                message_placeholder.markdown(full_response + "▌")
-                            message_placeholder.markdown(full_response)
-
-                            markdown_to_pdf(full_response,'question.pdf')
-                            
-                            word_doc = create_word_doc(full_response)
-                            doc_buffer = download_doc(word_doc)
-                            st.download_button(label="Download Word Document",
-                                            data=doc_buffer, 
-                                            file_name="generated_document.docx",
-                                            mime="application/octet-stream",
-                                            key='worddownload'
-                                                )
-
-
-                        st.session_state.messages.append({"role": "assistant", "content": english_output})
-
-                        # Display assistant response in chat message container
-
-                        if trans_output!="":
-                            with st.chat_message("assistant"):
-                                message_placeholder = st.empty()
-                                full_response = ""
-                                for char in trans_output:
-                                    full_response += char
-                                    message_placeholder.markdown(full_response + "▌")
-                                message_placeholder.markdown(full_response)
-
-                                markdown_to_pdf(full_response,'question.pdf')
-                                
-                                
-                                word_doc = create_word_doc(full_response)
-                                doc_buffer = download_doc(word_doc)
-                                st.download_button(label="Download Word Document", 
-                                                data=doc_buffer, 
-                                                file_name="generated_document.docx", 
-                                                mime="application/octet-stream",
-                                                key='worddownload1')
-
-                            st.session_state.messages.append({"role": "assistant", "content": full_response})
-
-            
-            
-            
             if choose=="Pre Uploaded":
                 def list_files(folder_path):
                     return os.listdir(folder_path)
@@ -468,33 +299,23 @@ if st.session_state.teach=='Teachers':
                         st.session_state.text = file.read()
 
                     if st.session_state.text:
-                            # st.session_state.aiformat_chain = ConversationChain( llm=AzureChatOpenAI(
-                            # deployment_name="gpt-4turbo",
-                            # temperature=0
-                            # ))
-                            # formatted_output = chat.aiformat_response(st.session_state.text)
-                            # st.info(formatted_output)
+                            
                             print("Inside Question Generation Bot")
                             
-                            #st.write("Dictionary:", existing_dictionary)
-                            #print(st.session_state.text)
-                            # print(st.session_state.filename[0])
                             docsearch = chat.get_cache_vectorstore(st.session_state.text,st.session_state.filename[0])
                             print("embeddings Done")
                             col1, col2 = st.columns(2)
                             with col1:
-                                st.session_state.complexity =  st.selectbox('Complexity mode required?*', ['Easy', 'Difficult'],index=0,key="mode")
-                                st.session_state.no_of_questions = st.number_input('No. of  questions to generate*',key="ai_questions",step=1,max_value=30)
-                                st.session_state.mode_of_questions = st.selectbox('Choose answer required?*', ['Only Questions', 'Questions with Answers'],index=0,key="quesansw")
+                                st.session_state.complexity =  st.selectbox('Complexity mode required?', ['Easy', 'Difficult'],index=0,key="mode")
+                                st.session_state.no_of_questions = st.number_input('No. of  questions to generate*',key="ai_questions",max_value=30)
+                                st.session_state.mode_of_questions = st.selectbox('Choose answer required?', ['Only Questions', 'Questions with Answers'],index=0,key="quesansw")
                             with col2:
-                                st.session_state.topic_name = st.text_input('Specific chapter/topic name*',placeholder="AI Chapter/Topic Name")
-                                st.session_state.type_of_questions =  st.selectbox('Choose question type*', ['Short Questions', 'Long Questions','MCQ','Fill in the Blanks','True and False'],index=0)
-                                st.session_state.language =  st.selectbox('Choose response language mode*', ['English','English and Hindi'],index=0,key="lang")
-                            # docsearch = chat.create_doc_embeddings(documents)
-                            #if is_word_in_text(st.session_state.topic_name,formatted_output) or st.session_state.topic_name=='' :
+                                st.session_state.topic_name = st.text_input('Specific chapter/topic name',placeholder="AI Chapter/Topic Name")
+                                st.session_state.type_of_questions =  st.selectbox('Choose question type', ['Short Questions', 'Long Questions','MCQ','Fill in the Blanks','True and False'],index=0)
+                                st.session_state.language =  st.selectbox('Choose response language mode', ['English','English and Hindi'],index=0,key="lang")
                             
                             if st.button("Submit"):
-                                if st.session_state.text and st.session_state.mode_of_questions!='Select option' :
+                                if st.session_state.text and st.session_state.mode_of_questions!='Select option' and st.session_state.no_of_questions>0 :
                                     st.session_state.llm = ConversationChain( llm=ChatOpenAI(
                                                               model = "gpt-3.5-turbo",
                                                               temperature=0.7,
@@ -551,6 +372,8 @@ if st.session_state.teach=='Teachers':
                         api_key=openai_api_key2
                         ),memory=memory)
                     _ = st.session_state.llm({'question':initialise_prompt})
+
+                    # THIS IS NOT ENABLED - this code fragment will not be called - START
                     if user_input:
                         english_output,trans_output = chat.answer(user_input)
 
@@ -604,7 +427,7 @@ if st.session_state.teach=='Teachers':
 
                             st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-
+                    # THIS IS NOT ENABLED - this code fragment will not be called - END
 
             
             if choose=="Terminologies and Keyterms":
@@ -857,7 +680,8 @@ if st.session_state.teach=='Teachers':
                       file_name="generated_document.docx", 
                       mime="application/octet-stream",
                       key='worddownload3')
-                    
+
+# MAIN CONTENT PART - Student Module Code
 if st.session_state.teach=='Students':
     choose=st.radio("Select Options",("Ask a Query","Text Analyzer"),horizontal=True)
 
@@ -1243,6 +1067,7 @@ if st.session_state.teach=='Students':
                                         key='worddownload3')
 
 
+# MAIN CONTENT PART - Administration Module Code
 if st.session_state.teach=='Administration':
     choose=st.radio("Select Options",("Add Document","Download Document","Delete Document","View Documents"),horizontal=True)
 
