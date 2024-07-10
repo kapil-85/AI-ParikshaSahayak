@@ -157,11 +157,10 @@ ai_topic_prompt="""Based on the context, generate only questions considering fol
 #    
 #    
 #"""
-ai_topic_prompt1=""" Using the document provided at the end, generate {} questions of type {} of diffuculty level {} for the topic = '{}'  
-    If Topic is not specified, create questions randomly identified in the provided document. 
-    Questions and answers should be started from new line.
-    First generate response in English then also in Hindi.
-    If the Topic is specified and it is not present in the selected Document, don't provide any questions or answers and rather write "This topic is not available in the Book" and then list all the topics which are present in the uploaded document in tabular format and call this list "Topics available"
+ai_topic_prompt1=""" Using the document provided at the end, generate {} questions of {} type for diffuculty level {} for the topic = '{}'  
+    If Topic is not specified, generate {} questions of {} type for diffuculty level {} randomly from the provided document. 
+    Questions and answers should be started with new line. For Multiple Choice question type, options should start with a new line.
+    If the Topic is provided but it is not available in the selected Document, respond to user with "This topic is not available in the Book." and then list all the topics which are available in the provided document in a tabular format.
     Document is as given below:
     {} 
     
