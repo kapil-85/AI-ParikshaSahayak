@@ -157,16 +157,12 @@ ai_topic_prompt="""Based on the context, generate only questions considering fol
 #    
 #    
 #"""
-ai_topic_prompt1=""" Format the response properly for display on webpage.
-    Using the document provided at the end, generate questions as specified in contraincts below:
-    Number of questions = {} 
-    Type of questions = {} 
-    Diffuculty level of questions = {}
-    Topic on which questions should be based = {} 
-    If Topic is not specified, generate asked questions randomly from the provided document. 
+ai_topic_prompt1=""" Format the response properly for display on webpage. Generate questions based on the content of the document provided by the user.
+    Generate {} type {} questions. The difficulty level should be {}. Topic to be used for generating questions is {}, 
+    but if Topic provided by user is not found in the given document, then respond to user with message "This topic is not available in the Book." and then list all the topics which are available in the provided document in a tabular format.
+    If Topic is not specified and left as blank, generate asked questions randomly from the provided document. 
     Questions and answers should start with a new line.
-    If the Topic is provided by user but it is not available in the provided Document, respond to user with message "This topic is not available in the Book." and then list all the topics which are available in the provided document in a tabular format.
-    User provided document is as given below:
+    Document provided by user is as given below:
     {} 
         
 """
