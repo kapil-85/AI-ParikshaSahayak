@@ -165,7 +165,6 @@ ai_topic_prompt1=""" Format the response properly for display on webpage.
     Topic on which questions should be based = {} 
     If Topic is not specified, generate asked questions randomly from the provided document. 
     Questions and answers should start with a new line.
-    Only if the Type of questions is equal to Multiple choice question, 4 options should be provided to select from and each option should start with a new line.
     If the Topic is provided by user but it is not available in the provided Document, respond to user with message "This topic is not available in the Book." and then list all the topics which are available in the provided document in a tabular format.
     User provided document is as given below:
     {} 
