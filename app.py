@@ -326,11 +326,11 @@ if st.session_state.teach=='Teachers':
                                                               ))
 
                                     CHECK_PROMPT = ai_topic_prompt1.format(st.session_state.no_of_questions,
-                                                                                                                           st.session_state.type_of_questions,
-                                                                                                                           st.session_state.complexity,
-                                                                                                                           st.session_state.topic_name,
-                                                                                                                           st.session_state.text
-                                                                                                                   )
+                                                                                       st.session_state.type_of_questions,
+                                                                                       st.session_state.complexity,
+                                                                                       st.session_state.topic_name,
+                                                                                       st.session_state.text
+                                                                               )
                                     print("============CHECKING================")
                                     print("============================")
                                     print(CHECK_PROMPT)
