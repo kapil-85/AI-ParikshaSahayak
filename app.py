@@ -314,7 +314,7 @@ if st.session_state.teach=='Teachers':
                                 st.session_state.mode_of_questions = st.selectbox('Choose answer required?', ['Only Questions', 'Questions with Answers'],index=0,key="quesansw")
                             with col2:
                                 st.session_state.topic_name = st.text_input('Specific chapter/topic name',placeholder="AI Chapter/Topic Name")
-                                st.session_state.type_of_questions =  st.selectbox('Choose question type', ['Short Questions', 'Long Questions','MCQ','Fill in the Blanks','True and False'],index=0)
+                                st.session_state.type_of_questions =  st.selectbox('Choose question type', ['Short Questions', 'Long Questions','Multiple Choice Question','Fill in the Blanks','True and False'],index=0)
                                 st.session_state.language =  st.selectbox('Choose response language mode', ['English','English and Hindi'],index=0,key="lang")
                             
                             if st.button("Submit"):
