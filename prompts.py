@@ -140,20 +140,30 @@ ai_topic_prompt="""Based on the context, generate only questions considering fol
 #    5. type of questions - {}
 #    6. Level of questions - {}
 
-ai_topic_prompt1="""Make sure the questions and answers are generated using the provided document only.
-    If Topic is not specified, create questions on topics randomly identified in the provided document.
+#ai_topic_prompt1="""Make sure the questions and answers are generated using the provided document only.
+#    If Topic is not specified, create questions on topics randomly identified in the provided document. 
+#    Questions and answers should be started from new line.
+#    First generate response in English then also in Hindi.
+#    Always start the Answers with a new line.
+#    If the Topic is specified and it is not present in the selected Document, don't provide any questions or answers and rather write "This topic is not available in the Book" and then list all the topics which are present in the uploaded document in tabular format and call this list "Topics available"
+#    Generate response considering following constraints,                   
+#    1. Topic for question generation - {}            
+#    2. number of questions to generate - {}
+#    3. Only Questions required or Questions with answers are required - {}
+#    4. type of questions to generate - {}
+#    5. Diffuculty level of questions - {}
+#    Document is as given below:
+#    6. document - {} 
+#    
+#    
+#"""
+ai_topic_prompt1=""" Using the document provided at the end, generate {} questions of type {} of diffuculty level {} for the topic = '{}'  
+    If Topic is not specified, create questions randomly identified in the provided document. 
     Questions and answers should be started from new line.
     First generate response in English then also in Hindi.
-    Always start the Answers with a new line.
     If the Topic is specified and it is not present in the selected Document, don't provide any questions or answers and rather write "This topic is not available in the Book" and then list all the topics which are present in the uploaded document in tabular format and call this list "Topics available"
-    Generate response considering following constraints,                   
-    1. Topic for question generation - {}            
-    2. number of questions to generate - {}
-    3. Only Questions required or Questions with answers are required - {}
-    4. type of questions to generate - {}
-    5. Diffuculty level of questions - {}
     Document is as given below:
-    6. document - {} 
+    {} 
     
     
 """
