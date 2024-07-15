@@ -1123,7 +1123,7 @@ if st.session_state.teach=='Administration':
             # Display download button for the selected file
             st.write("Download selected file:")
             with open(os.path.join(folder_path, selected_file), "rb") as file:
-                //st.download_button(label="Download", data=file, file_name=selected_file, mime="text/plain")
+                #st.download_button(label="Download", data=file, file_name=selected_file, mime="text/plain")
                 st.download_button(label="Download", data=file, file_name=selected_file, mime="pdf")
         else:
             st.write("Select Document to Download")
